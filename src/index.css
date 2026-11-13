@@ -1,0 +1,451 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/figtree';
+@import '@fontsource-variable/sora';
+
+/* Maqueta flotante: una escena 3D como pieza central y paneles elevados sobre un fondo con luz de color.
+   Verde, azul y rojo llevan el significado. Los neutros tienen sesgo azul. */
+:root {
+  --bg: #e6edf7;
+  --bg-glow-1: #b9d3fb;
+  --bg-glow-2: #bdeedd;
+  --surface: #f7faff;
+  --surface-hi: #ffffff;
+  --surface-2: #e9eff7;
+  --ink: #101d31;
+  --muted: #526279;
+  --line: #d8e1ec;
+  --rim: rgb(255 255 255 / 0.95);
+  --brand: #2563c9;
+  --brand-deep: #174a9d;
+  --brand-hi: #4a86e8;
+  --brand-ink: #ffffff;
+  --brand-text: #1f58b5;
+  --brand-soft: #dde9fb;
+  --ok-text: #0a7559;
+  --ok-soft: #d7f3e8;
+  --bad-text: #b81f35;
+  --bad-soft: #fce3e6;
+  --mark-justified: #1fb589;
+  --mark-unjustified: #bf2438;
+  --mark-unclassified: #3b7dd8;
+  --mark-near: #e8707e;
+  --mark-limit: #bf2438;
+  --mark-over: #8e1426;
+  --board: #cfdced;
+  --tile-unset: #e9f0f9;
+  --sheen: rgb(255 255 255 / 0.65);
+  --depth: inset 0 1px 0 var(--rim), 0 1px 2px rgb(28 50 90 / 0.07), 0 10px 22px -8px rgb(28 50 90 / 0.17), 0 30px 50px -26px rgb(28 50 90 / 0.24);
+  --depth-hover: inset 0 1px 0 var(--rim), 0 2px 4px rgb(28 50 90 / 0.08), 0 18px 32px -10px rgb(28 50 90 / 0.24), 0 42px 64px -28px rgb(28 50 90 / 0.32);
+  --well: inset 0 2px 4px rgb(28 50 90 / 0.13), inset 0 -1px 0 rgb(255 255 255 / 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #080d18;
+    --bg-glow-1: #17386e;
+    --bg-glow-2: #0e4a3c;
+    --surface: #111928;
+    --surface-hi: #1a2539;
+    --surface-2: #1c2638;
+    --ink: #e9f0f9;
+    --muted: #9dadc2;
+    --line: #29364a;
+    --rim: rgb(255 255 255 / 0.08);
+    --brand: #3f7fe0;
+    --brand-deep: #235bb4;
+    --brand-hi: #6aa2f4;
+    --brand-ink: #ffffff;
+    --brand-text: #8ab8f8;
+    --brand-soft: #182c47;
+    --ok-text: #5bd6b1;
+    --ok-soft: #123229;
+    --bad-text: #f78e9a;
+    --bad-soft: #3a1820;
+    --mark-justified: #24a98c;
+    --mark-unjustified: #d63d50;
+    --mark-unclassified: #4688e6;
+    --mark-near: #e8707e;
+    --mark-limit: #d63d50;
+    --mark-over: #a81d33;
+    --board: #223049;
+    --tile-unset: #33445f;
+    --sheen: rgb(255 255 255 / 0.09);
+    --depth: inset 0 1px 0 var(--rim), 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 24px -8px rgb(0 0 0 / 0.55), 0 32px 52px -26px rgb(0 0 0 / 0.7);
+    --depth-hover: inset 0 1px 0 var(--rim), 0 2px 4px rgb(0 0 0 / 0.4), 0 20px 34px -10px rgb(0 0 0 / 0.62), 0 44px 66px -28px rgb(0 0 0 / 0.8);
+    --well: inset 0 2px 5px rgb(0 0 0 / 0.5), inset 0 -1px 0 rgb(255 255 255 / 0.05);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #080d18;
+  --bg-glow-1: #17386e;
+  --bg-glow-2: #0e4a3c;
+  --surface: #111928;
+  --surface-hi: #1a2539;
+  --surface-2: #1c2638;
+  --ink: #e9f0f9;
+  --muted: #9dadc2;
+  --line: #29364a;
+  --rim: rgb(255 255 255 / 0.08);
+  --brand: #3f7fe0;
+  --brand-deep: #235bb4;
+  --brand-hi: #6aa2f4;
+  --brand-ink: #ffffff;
+  --brand-text: #8ab8f8;
+  --brand-soft: #182c47;
+  --ok-text: #5bd6b1;
+  --ok-soft: #123229;
+  --bad-text: #f78e9a;
+  --bad-soft: #3a1820;
+  --mark-justified: #24a98c;
+  --mark-unjustified: #d63d50;
+  --mark-unclassified: #4688e6;
+  --mark-near: #e8707e;
+  --mark-limit: #d63d50;
+  --mark-over: #a81d33;
+  --board: #223049;
+  --tile-unset: #33445f;
+  --sheen: rgb(255 255 255 / 0.09);
+  --depth: inset 0 1px 0 var(--rim), 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 24px -8px rgb(0 0 0 / 0.55), 0 32px 52px -26px rgb(0 0 0 / 0.7);
+  --depth-hover: inset 0 1px 0 var(--rim), 0 2px 4px rgb(0 0 0 / 0.4), 0 20px 34px -10px rgb(0 0 0 / 0.62), 0 44px 66px -28px rgb(0 0 0 / 0.8);
+  --well: inset 0 2px 5px rgb(0 0 0 / 0.5), inset 0 -1px 0 rgb(255 255 255 / 0.05);
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+@theme inline {
+  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Sora Variable', 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-text: var(--brand-text);
+  --color-brand-soft: var(--brand-soft);
+  --color-ok-text: var(--ok-text);
+  --color-ok-soft: var(--ok-soft);
+  --color-bad-text: var(--bad-text);
+  --color-bad-soft: var(--bad-soft);
+  --shadow-card: var(--depth);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Luz de color detrás de los paneles */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora::before,
+.aurora::after {
+  content: '';
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: drift 26s ease-in-out infinite alternate;
+}
+
+.aurora::before {
+  top: -24vmax;
+  right: -12vmax;
+  background: var(--bg-glow-1);
+}
+
+.aurora::after {
+  bottom: -30vmax;
+  left: -8vmax;
+  background: var(--bg-glow-2);
+  animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(-7vmax, 5vmax, 0) scale(1.1);
+  }
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* En una capa, para que las utilidades de Tailwind puedan ajustar estos componentes. */
+@layer components {
+/* Paneles */
+.panel {
+  position: relative;
+  border-radius: 1.5rem;
+  border: 1px solid var(--line);
+  background: linear-gradient(165deg, var(--surface-hi), var(--surface));
+  box-shadow: var(--depth);
+}
+
+.tilt {
+  transition: transform 500ms cubic-bezier(0.2, 0.9, 0.25, 1.15), box-shadow 300ms;
+  will-change: transform;
+}
+
+.tilt[data-tilting] {
+  box-shadow: var(--depth-hover);
+}
+
+.tilt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(22rem circle at var(--mx, 50%) var(--my, 0%), var(--sheen), transparent 70%);
+  transition: opacity 300ms;
+}
+
+.tilt[data-tilting]::after {
+  opacity: 1;
+}
+
+/* Botones con recorrido real al pulsar */
+.btn {
+  transition: transform 120ms, box-shadow 120ms, background-color 150ms, color 150ms, filter 150ms;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--brand-hi), var(--brand));
+  color: var(--brand-ink);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 3px 0 var(--brand-deep), 0 8px 16px -6px var(--brand);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.07);
+}
+
+.btn-primary:active:not(:disabled) {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2), 0 1px 0 var(--brand-deep);
+}
+
+.btn-secondary,
+.btn-danger {
+  background: linear-gradient(180deg, var(--surface-hi), var(--surface));
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 var(--rim), 0 2px 0 var(--line);
+}
+
+.btn-secondary:active:not(:disabled),
+.btn-danger:active:not(:disabled) {
+  box-shadow: inset 0 1px 0 var(--rim);
+}
+
+/* Campos hundidos */
+.well {
+  background: var(--surface-2);
+  box-shadow: var(--well);
+  border: 1px solid transparent;
+  transition: box-shadow 150ms, border-color 150ms;
+}
+
+.well:focus {
+  border-color: var(--brand);
+}
+
+/* Barra de límite con volumen */
+.bar-track {
+  background: var(--surface-2);
+  box-shadow: var(--well);
+}
+
+.bar-fill {
+  position: relative;
+  transform-origin: left;
+  animation: bar-grow 900ms cubic-bezier(0.2, 0.9, 0.25, 1) both;
+  transition: width 600ms cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.5), transparent 48%, rgb(0 0 0 / 0.2));
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Exceso sobre el límite: rayado en movimiento para que no dependa solo del color */
+.bar-over {
+  background-image: repeating-linear-gradient(135deg, var(--mark-over) 0 7px, var(--mark-limit) 7px 14px);
+  background-size: 200% 100%;
+  animation: bar-grow 900ms cubic-bezier(0.2, 0.9, 0.25, 1) both, stripes 16s linear infinite;
+}
+
+@keyframes stripes {
+  to {
+    background-position: -198px 0;
+  }
+}
+
+/* Entrada de cada vista */
+.view {
+  perspective: 1400px;
+}
+
+.stagger > * {
+  animation: rise 620ms cubic-bezier(0.2, 0.9, 0.25, 1.05) backwards;
+}
+
+.stagger > :nth-child(2) { animation-delay: 60ms; }
+.stagger > :nth-child(3) { animation-delay: 120ms; }
+.stagger > :nth-child(4) { animation-delay: 180ms; }
+.stagger > :nth-child(5) { animation-delay: 240ms; }
+.stagger > :nth-child(6) { animation-delay: 300ms; }
+.stagger > :nth-child(n + 7) { animation-delay: 360ms; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, -70px) rotateX(7deg);
+  }
+}
+
+/* Etiquetas de la maqueta */
+.skyline-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10.5px;
+  line-height: 1.15;
+  color: var(--ink);
+  white-space: nowrap;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-hi) 80%, transparent);
+  will-change: transform;
+}
+
+.skyline-label strong {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.skyline-label[data-selected='true'] {
+  color: var(--brand-text);
+  font-weight: 600;
+}
+
+/* Diálogo */
+dialog::backdrop {
+  background: rgb(6 11 20 / 0.5);
+  backdrop-filter: blur(6px);
+  animation: fade 220ms both;
+}
+
+dialog[open] {
+  box-shadow: var(--depth-hover);
+  animation: dialog-in 380ms cubic-bezier(0.2, 0.9, 0.25, 1.12) both;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: perspective(900px) translate3d(0, 34px, -90px) rotateX(-13deg);
+  }
+}
+
+.toast {
+  animation: toast-in 340ms cubic-bezier(0.2, 0.9, 0.25, 1.2) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.95);
+  }
+}
+
+/* Aviso visible al aparecer un límite superado */
+.alert-critical {
+  animation: pulse 1.5s ease-out 3;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--mark-limit);
+  }
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+
+/* Indicador deslizante de la navegación */
+.nav-marker {
+  transition: transform 420ms cubic-bezier(0.2, 0.9, 0.25, 1.2);
+}
+
+.spin-in {
+  animation: spin-in 420ms cubic-bezier(0.2, 0.9, 0.25, 1.2);
+}
+
+@keyframes spin-in {
+  from {
+    opacity: 0;
+    transform: rotate(-110deg) scale(0.6);
+  }
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
